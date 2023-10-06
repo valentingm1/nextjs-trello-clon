@@ -1,19 +1,21 @@
 "use client";
 
-import { useBoardStore } from "@/store/BoardStorage";
+import { useBoardStore } from "@/store/BoardStore";
 import { useEffect } from "react";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import Column from "./Column";
 
 function Board() {
-  const [board, getBoard, setBoardState, updateTodoInDb] = useBoardStore((state) => [
-    state.board,
-    state.getBoard,
-    state.setBoardState,
-    state.updateTodoInDb
-  ]);
+  const [board, getBoard, setBoardState, updateTodoInDb] = useBoardStore(
+    (state) => [
+      state.board,
+      state.getBoard,
+      state.setBoardState,
+      state.updateTodoInDb,
+    ]
+  );
   useEffect(() => {
-  getBoard();
+    getBoard();
   }, [getBoard]);
 
   const handleOnDragEnd = (result: DropResult) => {
@@ -38,7 +40,6 @@ function Board() {
     const startColIndex = columns[Number(source.droppableId)];
     const finishColIndex = columns[Number(destination.droppableId)];
 
-
     const startCol: Column = {
       id: startColIndex[0],
       todos: startColIndex[1].todos,
@@ -49,7 +50,7 @@ function Board() {
       todos: finishColIndex[1].todos,
     };
 
-    console.log(startCol, finishCol)
+    console.log(startCol, finishCol);
 
     if (!startCol || !finishCol) return; // Si no encuentra ninguna columna, para la funcion
     if (source.index === destination.index && startCol === finishCol) return; // Si vuelve a la misma columna, para la función
@@ -86,7 +87,7 @@ function Board() {
         todos: finishTodos,
       });
 
-      updateTodoInDb(todoMoved, finishCol.id)
+      updateTodoInDb(todoMoved, finishCol.id);
 
       setBoardState({ ...board, columns: newColumns });
     }

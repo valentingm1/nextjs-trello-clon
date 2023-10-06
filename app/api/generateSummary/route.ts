@@ -12,11 +12,11 @@ export async function POST(request: Request) {
         messages: [
             {
                 role: "system",
-                content: "Cuando respondas, siempre dale la bienvenida al usuario, y -SIEMPRE- utilizá un fuerte acento rioplatense. Limitar la respuesta a 200 caracteres"
+                content: "Cuando respondas, siempre dale la bienvenida al usuario, y -SIEMPRE- utilizá un fuerte acento rioplatense. Limitar la respuesta a 300 caracteres"
             },
             {
                 role: "user",
-                content: `Hola, dame un resumen de las siguientes tareas. Cuantas tareas hay en las categorias 'To Do' 'WIP(Work In Progress)' y 'Done', después deseale al usuario un día productivo. Acá está la data: ${JSON.stringify(todos)}`
+                content: `Hola, dame un resumen de las siguientes tareas. Cuantas tareas hay en las categorias 'To Do' 'WIP(Work In Progress)' y 'Done', después dale un consejo al usuario sobre cómo ser productivo, y deseale un buen día. -SIEMPRE- utilizá un fuerte acento rioplatense. Límite 300 caracteres. Acá está la data: ${JSON.stringify(todos)}`
             }
         ]
     });
